@@ -47,15 +47,26 @@ class AccountField extends ArrayField
         $current_ip->setInternalIsVirtual();
         $current_mtime = new TextField();
         $current_mtime->setInternalIsVirtual();
+        $ip_type = 'ip'.$node->checktype;
         if (isset(self::$current_stats[$node->getAttribute('uuid')])) {
             $stats = self::$current_stats[$node->getAttribute('uuid')];
-            $current_ip->setValue($stats['ip']);
+            if (!empty($stats[$ip_type])) {
+                $current_ip->setValue($stats[$ip_type]);
+            } else {
+                // fallback to legacy value
+                $current_ip->setValue($stats['ip']);
+            }
             $current_mtime->setValue(date('c', (int)$stats['mtime']));
         } elseif (!empty((string)$node->hostnames)) {
             foreach (explode(",", (string)$node->hostnames) as $hostname) {
-                if (!empty(self::$current_stats[$hostname]) && !empty(self::$current_stats[$hostname]['ip'])) {
+                if (!empty(self::$current_stats[$hostname]) && (!empty(self::$current_stats[$hostname][$ip_type]) || !empty(self::$current_stats[$hostname]['ip']))) {
                     $stats = self::$current_stats[$hostname];
-                    $current_ip->setValue($stats['ip']);
+                    if (!empty($stats[$ip_type])) {
+                        $current_ip->setValue($stats[$ip_type]);
+                    } else {
+                        // fallback to legacy value
+                        $current_ip->setValue($stats['ip']);
+                    }
                     $current_mtime->setValue(date('c', $stats['mtime']));
                     break;
                 }

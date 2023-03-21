@@ -88,6 +88,12 @@
         <help>How long to wait before the checkip process times out</help>
     </field>
     <field>
+        <id>account.checktype</id>
+        <label>Type of ip to check</label>
+        <type>dropdown</type>
+        <help>Select IPv4 or IPv6</help>
+    </field>
+    <field>
         <id>account.force_ssl</id>
         <label>Force SSL</label>
         <type>checkbox</type>

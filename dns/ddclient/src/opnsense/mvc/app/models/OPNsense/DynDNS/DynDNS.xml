@@ -165,6 +165,15 @@
                     <MinimumValue>10</MinimumValue>
                     <MaximumValue>60</MaximumValue>
                 </checkip_timeout>
+                <checktype type="OptionField">
+                    <Required>Y</Required>
+                    <default>v4</default>
+                    <ValidationMessage>An IP type is required.</ValidationMessage>
+                    <OptionValues>
+                        <ipv4 value="v4">IPv4</ipv4>
+                        <ipv6 value="v6">IPv6</ipv6>
+                    </OptionValues>
+                </checktype>
                 <force_ssl type="BooleanField">
                     <default>1</default>
                     <Required>Y</Required>

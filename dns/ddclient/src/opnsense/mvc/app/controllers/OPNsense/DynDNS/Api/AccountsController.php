@@ -44,7 +44,7 @@ class AccountsController extends ApiMutableModelControllerBase
             "accounts.account",
             [
               'enabled', 'service', 'description', 'username', 'hostnames', 'use_interface',
-              'interface', 'protocol', 'current_ip', 'current_mtime'
+              'interface', 'protocol', 'current_ip', 'current_mtime', 'checktype',
             ],
             "description"
         );
